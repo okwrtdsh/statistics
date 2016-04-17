@@ -83,7 +83,8 @@ class Statistics(object):
         Sturges' formulaを利用
         """
         if self._bins is None:
-            self._bins = int(math.ceil(1 + (math.log(self.length, 10) / math.log(2, 10))))
+            self._bins = int(
+                math.ceil(1 + (math.log(self.length, 10) / math.log(2, 10))))
         return self._bins
 
     @property
@@ -92,9 +93,9 @@ class Statistics(object):
         階級幅
         """
         if self._bin_width is None:
-            self._bin_width = int(math.ceil((self.data[-1] - self.data[0]) / float(self.bins)))
+            self._bin_width = int(
+                math.ceil((self.data[-1] - self.data[0]) / float(self.bins)))
         return self._bin_width
-
 
     @property
     def classes(self):
@@ -107,7 +108,7 @@ class Statistics(object):
                 if i == 0:
                     result.append(self.data[0] + 0.5)
                 else:
-                    result.append(result[i-1] + self.bin_width)
+                    result.append(result[i - 1] + self.bin_width)
             self._classes = result
         return self._classes
 
@@ -117,7 +118,7 @@ class Statistics(object):
         度数分布表
         """
         if self._frequency is None:
-            result = {c:[] for c in self.classes}
+            result = {c: [] for c in self.classes}
             i = 0
             for c in self.classes:
                 while i < self.length and self.data[i] < c:

@@ -1,0 +1,11 @@
+language: python
+
+python:
+  - "2.6"
+  - "2.7"
+  - "2.7.11"
+
+script:
+  - python ./statistics/basic.py
+  - python ./statistics/chisquare.py
+
