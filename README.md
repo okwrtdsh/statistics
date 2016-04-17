@@ -1,1 +1,1 @@
-# statistics
+# statistics ![](https://travis-ci.org/okwrtdsh/statistics.svg?branch=master)
