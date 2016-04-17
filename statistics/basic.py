@@ -117,13 +117,6 @@ class Statistics(object):
         度数分布表
         """
         if self._frequency is None:
-            # result = {}
-            # for c in self.classes:
-            #     for i in self.data:
-            #         if c <= i < c+self.bin_width:
-            #             val = result.setdefault(c, [])
-            #             val.append(i)
-            #             result[c] = val
             result = {c:[] for c in self.classes}
             i = 0
             for c in self.classes:
