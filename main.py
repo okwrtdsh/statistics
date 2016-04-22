@@ -37,11 +37,15 @@ if __name__ == "__main__":
     else:
         data = map(int, args)
     s = Statistics(data, bin_width=options.bin_width, bins=options.bins)
-    F = 0
-    P = 0
-    for i, v in sorted(s.frequency.items()):
-        f = len(v)
-        F += f
-        p = f / s.length
-        P += p
-        print i, f, F, p, P, v
+    for c in s.classes:
+        print "{:<5}\t{:<3}\t{:<15}\t{:<15}\t{:<15}\t{:<17}\t{:<15}".format(
+            c,
+            s.frequencies[c],
+            s.proportions[c],
+            s.zscores[c],
+            s.cumulative_ratios[c],
+            s.class_ratios[c],
+            s.expectations[c]
+        )
+    print(sum(s.class_ratios.values()))
+

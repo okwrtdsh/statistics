@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import math
+from .normal import normal
 
 
 class Statistics(object):
@@ -9,7 +10,12 @@ class Statistics(object):
     _variance = None
     _stdev = None
     _classes = None
-    _frequency = None
+    _frequencies = None
+    _proportions = None
+    _zscores = None
+    _cumulative_ratios = None
+    _class_ratios = None
+    _expectations = None
 
     def __init__(self, data, bins=None, bin_width=None):
         """
@@ -113,19 +119,92 @@ class Statistics(object):
         return self._classes
 
     @property
-    def frequency(self):
+    def frequencies(self):
         """
-        度数分布表
+        度数
         """
-        if self._frequency is None:
-            result = {c: [] for c in self.classes}
+        if self._frequencies is None:
+            result = {}
             i = 0
             for c in self.classes:
+                cnt = 0
                 while i < self.length and self.data[i] < c:
-                    result[c].append(self.data[i])
                     i += 1
-            self._frequency = result
-        return self._frequency
+                    cnt += 1
+                result[c] = cnt
+            self._frequencies = result
+        return self._frequencies
+
+    @property
+    def proportions(self):
+        """
+        比率
+        """
+        if self._proportions is None:
+            result = {}
+            frequencies = self.frequencies
+            for c in self.classes:
+                result[c] = frequencies[c] / self.length
+            self._proportions = result
+        return self._proportions
+
+    @property
+    def zscores(self):
+        """
+        Z score
+        """
+        if self._zscores is None:
+            result = {}
+            for c in self.classes:
+                result[c] = (c - self.mean) / self.stdev
+            self._zscores = result
+        return self._zscores
+
+    @property
+    def cumulative_ratios(self):
+        """
+        累積比率
+        """
+        if self._cumulative_ratios is None:
+            result = {}
+            zscores = self.zscores
+            for c in self.classes:
+                result[c] = normal(zscores[c])
+            self._cumulative_ratios = result
+        return self._cumulative_ratios
+
+    @property
+    def class_ratios(self):
+        """
+        階級比率
+        """
+        if self._class_ratios is None:
+            result = {}
+            cumulatives = self.cumulative_ratios
+            cs = self.classes
+            s = 0
+            for i in range(len(cs)):
+                result[cs[i]] = cumulatives[cs[i]]
+                if i > 0:
+                    result[cs[i]] -= cumulatives[cs[i - 1]]
+                s += result[cs[i]]
+            for c in cs:
+                result[c] *= 1.0 / s
+            self._class_ratios = result
+        return self._class_ratios
+
+    @property
+    def expectations(self):
+        """
+        期待度数
+        """
+        if self._expectations is None:
+            result = {}
+            crs = self.class_ratios
+            for c in self.classes:
+                result[c] = self.length * crs[c]
+            self._expectations = result
+        return self._expectations
 
 if __name__ == "__main__":
     import doctest
