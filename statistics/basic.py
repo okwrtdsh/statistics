@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import math
 from .normal import normal
+from .chisquare import chisquare
 
 
 class Statistics(object):
@@ -16,8 +17,12 @@ class Statistics(object):
     _cumulative_ratios = None
     _class_ratios = None
     _expectations = None
+    _chisquare = None
+    _fit_test = None
+    freedom = None
+    critical_region = None
 
-    def __init__(self, data, bins=None, bin_width=None):
+    def __init__(self, data, bins=None, bin_width=None, significance_level=None):
         """
         >>> Statistics([1, 2, 3, 4, 5]).data
         [1.0, 2.0, 3.0, 4.0, 5.0]
@@ -25,6 +30,7 @@ class Statistics(object):
         self.data = map(float, sorted(data))
         self._bins = bins
         self._bin_width = bin_width
+        self.significance_level = significance_level
 
     @property
     def total(self):
@@ -205,6 +211,41 @@ class Statistics(object):
                 result[c] = self.length * crs[c]
             self._expectations = result
         return self._expectations
+
+    @property
+    def chisquare(self):
+        if self._chisquare is None:
+            es = self.expectations
+            fs = self.frequencies
+            cs = self.classes
+            x, f, e, cnt = 0.0, 0.0, 0.0, 0.0
+            for c in self.classes:
+                if f + fs[c] < 5.0:
+                    f += fs[c]
+                    e += es[c]
+                    continue
+                x += (f - e) ** 2.0 / e
+                f = fs[c]
+                e = es[c]
+                cnt += 1.0
+            else:
+                x += (f - e) ** 2.0 / e
+                cnt += 1.0
+            self._chisquare = x
+            self.freedom = cnt - 2 - 1
+        return self._chisquare
+
+    def fit_test(self):
+        if self._fit_test is None:
+            x = self.chisquare
+            self.critical_region = chisquare(self.freedom, self.significance_level)
+            if x < self.critical_region:
+                result = "accept"
+            else:
+                result = "reject"
+            self._fit_test = result
+        return self._fit_test
+
 
 if __name__ == "__main__":
     import doctest

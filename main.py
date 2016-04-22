@@ -1,6 +1,7 @@
 import os
 import sys
 from statistics.basic import Statistics
+from statistics.chisquare import chisquare
 from optparse import OptionParser, OptionValueError
 
 
@@ -29,6 +30,13 @@ if __name__ == "__main__":
         default=None,
         help="bin width"
     )
+    parser.add_option(
+        "-s", "--significance_level",
+        type="float",
+        dest="significance_level",
+        default=0.05,
+        help="significance level"
+    )
 
     options, args = parser.parse_args()
     if options.data_file:
@@ -36,7 +44,12 @@ if __name__ == "__main__":
             data = map(int, f.read().split())
     else:
         data = map(int, args)
-    s = Statistics(data, bin_width=options.bin_width, bins=options.bins)
+    s = Statistics(
+        data,
+        bin_width=options.bin_width,
+        bins=options.bins,
+        significance_level=options.significance_level
+    )
     for c in s.classes:
         print "{:<5}\t{:<3}\t{:<15}\t{:<15}\t{:<15}\t{:<17}\t{:<15}".format(
             c,
@@ -47,5 +60,11 @@ if __name__ == "__main__":
             s.class_ratios[c],
             s.expectations[c]
         )
-    print(sum(s.class_ratios.values()))
+    result = s.fit_test()
+    print(s.chisquare)
+    print(s.freedom)
+    print(s.critical_region)
+    print(result)
+
+
 
