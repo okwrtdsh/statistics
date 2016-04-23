@@ -9,7 +9,7 @@ def nrand():
     return n - 6.0
 
 
-def normal_random(n, mu=0, sigma=1, use_default=True):
+def normal_random(n, mu=0.0, sigma=1.0, use_default=True):
     if use_default:
         r = [random.normalvariate(mu=mu, sigma=sigma) for _ in xrange(n)]
     else:

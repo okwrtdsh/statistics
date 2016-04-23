@@ -10,6 +10,8 @@ python:
 script:
   - python ./statistics/basic.py
   - python ./statistics/chisquare.py
+  - python ./statistics/misc.py
+  - python ./statistics/normal.py
 
 sudo: required
 

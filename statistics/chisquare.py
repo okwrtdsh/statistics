@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import math
-from .misc import integration, binary_search
+from misc import integration, binary_search
 
 
 def pdf(x, n):
