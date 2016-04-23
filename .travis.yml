@@ -12,6 +12,7 @@ script:
   - python ./statistics/chisquare.py
   - python ./statistics/misc.py
   - python ./statistics/normal.py
+  - python main.py -f height.txt -b 10 -w 3
 
 sudo: required
 
