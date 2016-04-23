@@ -53,9 +53,9 @@ if __name__ == "__main__":
         bins=options.bins,
         significance_level=options.significance_level
     )
-    print u"階級\t度数\t比率\t\tZ-Score\t\t階級の比率\t期待比率\t\t期待度数"
+    print u"階級\t度数\t比率\t\t\tZ-Score\t\t\t階級の比率\t\t期待比率\t\t期待度数"
     for c in s.classes:
-        print "{:<5}\t{:<3}\t{:<15}\t{:<15}\t{:<15}\t{:<17}\t{:<15}".format(
+        print "{:<5}\t{:<3}\t{:<18}\t{:<18}\t{:<18}\t{:<18}\t{:<18}".format(
             c,
             s.frequencies[c],
             s.proportions[c],
