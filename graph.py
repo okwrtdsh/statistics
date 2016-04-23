@@ -1,11 +1,21 @@
+# -*- coding: utf-8 -*-
+"""
+グラフ出力
+Requirement:
+    * numpy
+    * matplotlib
+"""
 import os
 import sys
+import math
+import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from statistics.basic import Statistics
 from optparse import OptionParser, OptionValueError
 from statistics.normal_random import normal_random
+from statistics.chisquare import pdf as chisquare_pdf
 
 
 if __name__ == "__main__":
@@ -60,14 +70,9 @@ if __name__ == "__main__":
     options, args = parser.parse_args()
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    import math
-    import numpy as np
-    def pdf(x, n):
-        return x**(n/2.0 - 1.0) * math.exp(-x/2.0) / (2.0**(n/2.0)*math.gamma(n/2.0))
-    C = 250
     for n in xrange(1, 11):
-        x=np.linspace( 0., 25., C)[1:]
-        y = [pdf(i, n) for i in x]
+        x=np.linspace( 0., 25., 250)[1:]
+        y = [chisquare_pdf(i, n) for i in x]
         ax.plot(x, y, label="n=%s" % n)
 
     l = []
