@@ -1,9 +1,10 @@
 # 使い方
+注: markdown調で書いているのでこちら(https://github.com/okwrtdsh/statistics)から見ることをお勧めいたします。
 
 ## 演習課題2
 ### オプションについて
 ```shell
-$ python main.py --help                                                                                                                                               [13:17:10]
+$ python main.py --help
 ```
 
 ```shell
@@ -37,7 +38,7 @@ Options:
 ### 例1(ファイルを指定)
 #### 入力
 ```shell
-$ python main.py -f height.txt                                                                                                                                        [13:43:05]
+$ python main.py -f height.txt
 ```
 #### 出力
 ```shell
@@ -60,7 +61,7 @@ accept
 ### 例2(階級の幅と階級の数を指定)
 #### 入力
 ```shell
-$ python main.py -f height.txt -b 10 -w 3                                                                                                                             [13:16:12]
+$ python main.py -f height.txt -b 10 -w 3
 ```
 #### 出力
 ```shell
@@ -86,7 +87,7 @@ accept
 ### 例3(有意水準を指定)
 #### 入力
 ```shell
-$ python main.py -f height.txt -b 10 -w 3 -s 0.95                                                                                                                     [13:41:08]
+$ python main.py -f height.txt -b 10 -w 3 -s 0.95
 ```
 #### 出力
 ```shell
@@ -141,7 +142,7 @@ accept
 
 ### オプションについて
 ```shell
-$ python graph.py --help                                                                                                                                              [13:45:11]
+$ python graph.py --help
 ```
 
 ```shell
@@ -170,7 +171,7 @@ Options:
 * -a AVARAGE, --avarage=AVARAGE
   * 平均値をAVARAGEに指定します。デフォルトは150です。
 * -s SIGMA, --sigma=SIGMA
-  * 変化幅をSIGMAに指定します。デフォルトは10です。
+  * 標準偏差をSIGMAに指定します。デフォルトは10です。
 * -e EXECUTIONS, --executions=EXECUTIONS
   * 実行回数をEXECUTIONSに指定します。デフォルトは1000です。
 * -f FILE_NAME, --file_name=FILE_NAME
