@@ -42,7 +42,7 @@ if __name__ == "__main__":
     options, args = parser.parse_args()
     if options.data_file:
         with open(options.data_file,"r") as f:
-            data = map(int, f.read().split())
+            data = map(float, f.read().split())
     else:
         data = map(int, args)
     if not data:
@@ -53,7 +53,7 @@ if __name__ == "__main__":
         bins=options.bins,
         significance_level=options.significance_level
     )
-    print u"階級\t度数\t比率\t\t\tZ-Score\t\t\t階級の比率\t\t期待比率\t\t期待度数"
+    print u"階級\t度数\t比率\t\t\tZ-Score\t\t\t累積比率\t\t期待比率\t\t期待度数"
     for c in s.classes:
         print "{:<5}\t{:<3}\t{:<18}\t{:<18}\t{:<18}\t{:<18}\t{:<18}".format(
             c,

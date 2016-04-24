@@ -1,5 +1,3 @@
-# statistics [![](https://travis-ci.org/okwrtdsh/statistics.svg?branch=master)](https://travis-ci.org/okwrtdsh/statistics)
-
 # 使い方
 
 ## 演習課題2
