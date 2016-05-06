@@ -1,5 +1,13 @@
 # statistics [![](https://travis-ci.org/okwrtdsh/statistics.svg?branch=master)](https://travis-ci.org/okwrtdsh/statistics)
 
+# Pythonのversion
+以下のversionで実行テストを行っています。[テスト結果](https://travis-ci.org/okwrtdsh/statistics)
+  - 2.7.6
+  - 2.7.8
+  - 2.7.9
+  - 2.7.10
+  - 2.7.11
+
 # 使い方
 
 ## 演習課題2
